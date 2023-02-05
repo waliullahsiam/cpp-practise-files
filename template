@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+#define nl "\n"
+#define ll long long
+#define ull unsigned long long
+#define all(v) v.begin(),v.end()
+#define fastio ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
+#define watch(x) cerr << "\n" << (#x) << " is " << (x) << nl;
+#define iterate(i, n) for(int i = 0; i < n; i++)
+#define print_printable_vector_inline(v) for(auto i:v) {cout << i << " ";}; cout << nl;
+
+int kase = 1;
+
+using namespace std;
+
+void solve() {
+
+}
+
+int main()
+{
+ fastio;
+    #ifndef ONLINE_JUDGE
+        f
+reopen("input.txt","r", stdin);
+        freopen("output.txt","w", stdout);
+    #endif
+ int t;
+ cin >> t;
+ while(t--) {
+  solve();
+ }
+}
