@@ -1,0 +1,156 @@
+#include <iostream>
+
+using namespace std;
+
+template<class T>
+
+class node{
+
+public:
+    T data;
+
+    node* nxt;
+
+
+};
+template<class T>
+class linklist{
+
+public:
+
+   node<T>* head;
+
+   int sz;
+
+   linklist()
+   {
+       head=NULL;
+       sz=0;
+   }
+
+   node<T>* create(T val)
+   {
+     node<T> *a=new node<T>;
+
+     a->data=val;
+     a->nxt=NULL;
+
+
+   }
+
+
+   void push(int val)
+   {
+       sz++;
+       node<T>* a=create(val);
+
+       if(head==NULL)
+       {
+           head=a;
+           return;
+       }
+
+       node<T>* b =head;
+
+       a->nxt=b;
+
+
+
+
+       head=a;
+
+   }
+
+   void top()
+   {
+       cout<<head->data<<endl;
+
+   }
+
+   void pop()
+   {
+       if(head==NULL)
+       {
+           return;
+       }
+
+       node<T> *a=head;
+
+       head=a->nxt;
+
+       delete a;
+       sz--;
+
+
+   }
+
+   int getsize()
+   {
+       return sz;
+   }
+
+
+
+
+
+};
+
+template<class T>
+
+class Stack{
+
+    public:
+
+    linklist<T> ll;
+
+
+    void top1()
+    {
+        if(ll.getsize()==0)
+        {
+            cout<<"empty";
+            return;
+        }
+
+        ll.top();
+    }
+
+    void push1(T val)
+    {
+        ll.push(val);
+    }
+
+    void pop1()
+    {
+        if(ll.getsize()==0)
+        {
+            cout<<"Empty\n";
+        }
+
+        ll.pop();
+
+    }
+
+
+
+
+
+
+
+
+};
+
+
+int main() {
+    
+   Stack<char>ch;
+
+   ch.push1('p');
+   ch.push1('t');
+   ch.push1('y');
+   ch.pop1();
+
+   ch.top1();
+
+    return 0;
+}
