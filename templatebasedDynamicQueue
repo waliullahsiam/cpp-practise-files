@@ -1,0 +1,147 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+template<class T>
+
+class Queue
+{
+    public:
+    int arr_cap;
+    T * a;
+    int sz;
+    int l,r;
+
+    Queue()
+    {
+        a= new T[1];
+        arr_cap=1;
+        sz=0;
+        l=0;
+
+        r=-1;
+
+    }
+
+    void remove_circle()
+    {
+        if(l>r)
+        {
+            T *tmp=new T [arr_cap];
+            int idx=0;
+
+            for(int i=l;i<arr_cap;i++)
+            {
+                tmp[idx]=a[i];
+                idx++;
+            }
+            for(int i=0;i<=r;i++)
+            {
+                tmp[idx]=a[i];
+                idx++;
+            }
+            swap(a,tmp);
+
+            delete[] tmp;
+
+            l=0;
+
+            r=arr_cap-1;
+        }
+    }
+
+
+
+    void increase()
+    {
+
+        remove_circle();
+        T* tmp= new T[arr_cap*2];
+
+        for(int i=0;i<arr_cap;i++)
+        {
+            tmp[i]=a[i];
+        }
+
+        swap(a,tmp);
+
+        delete[] tmp;
+
+        arr_cap=arr_cap*2;
+    }
+
+    void enque(T val)
+    {
+        if(sz==arr_cap)
+        {
+            increase();
+
+        }
+
+
+
+
+
+        r++;
+
+        if(r==arr_cap)
+        {
+            r=0;
+        }
+
+        a[r]=val;
+
+        sz++;
+
+    }
+
+    void dequeue()
+    {
+        if(sz==0)
+        {
+            cout<<"QUEUE is empty\n";
+
+            return ;
+        }
+
+        l++;
+
+        if(l==arr_cap)
+        {
+            l=0;
+        }
+        sz--;
+    }
+
+    int front()
+    {
+        return a[l];
+    }
+
+    int size()
+    {
+        return sz;
+    }
+
+
+};
+
+int main()
+{
+    Queue<int> q;
+
+    q.enque(8);
+    q.enque(9);
+    q.enque(7);
+    q.enque(3);
+     cout<<q.front()<<endl;
+
+     cout<<q.size()<<endl;
+     
+    q.dequeue();
+    
+   cout<<q.front();
+
+
+
+}
