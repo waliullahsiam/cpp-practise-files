@@ -1,0 +1,140 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+class node
+{
+
+public:
+    int id;
+
+    node* parent;
+    node* left;
+    node* right;
+
+
+
+};
+
+class bintree
+{
+public:
+
+    node* root;
+
+    bintree()
+    {
+        root=NULL;
+    }
+
+    node* createnode(int val)
+    {
+        node* a=new node;
+
+        a->id=val;
+        a->parent=NULL;
+        a->left=NULL;
+        a->right=NULL;
+
+        return a;
+    }
+
+    node* arr[6];
+
+    void creating()
+    {
+
+
+        for(int i=0; i<6; i++)
+        {
+            arr[i]=createnode(i);
+        }
+
+        arr[0]->left=arr[1];
+        arr[0]->right=arr[2];
+
+        arr[1]->parent=arr[0];
+        arr[1]->right=NULL;
+        arr[1]->left=arr[5];
+
+        arr[2]->parent=arr[0];
+        arr[2]->left=arr[3];
+        arr[2]->right=arr[4];
+
+        arr[5]->parent=arr[1];
+
+
+
+        arr[3]->parent=arr[2];
+        arr[4]->parent=arr[2];
+
+
+        root=arr[0];
+
+
+
+    }
+
+
+    void BFS()
+    {
+        queue<node*>q;
+
+        q.push(root);
+
+        while(!q.empty())
+        {
+            int p=-1,r=-1,l=-1;
+
+            node* front_node=q.front();
+
+            q.pop();
+
+            if(front_node->left!=NULL)
+            {
+                l=front_node->left->id;
+
+                q.push(front_node->left);
+
+            }
+
+            if(front_node->right!=NULL)
+            {
+                r=front_node->right->id;
+
+                q.push(front_node->right);
+
+            }
+
+            if(front_node->parent!=NULL)
+            {
+                p=front_node->parent->id;
+
+            }
+
+
+            cout<<"node: "<<front_node->id<<" mother: "<<p<<" left: "<<l<<" right: "<<r<<endl;
+
+        }
+
+
+
+    }
+
+
+
+
+
+
+};
+
+
+
+int main()
+{
+    bintree bb;
+
+    bb.creating();
+    bb.BFS();
+
+}
