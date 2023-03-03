@@ -1,0 +1,257 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+class node
+{
+
+public:
+    int id;
+    int val;
+
+    node* parent;
+    node* left;
+    node* right;
+
+
+
+};
+
+class bintree
+{
+public:
+
+    node* root;
+    
+    //constructor creation
+    
+
+    bintree()
+    {
+        root=NULL;
+    }
+
+    //new node creation
+    
+    node* createnode(int id,int val)
+    {
+        node* a=new node;
+
+        a->id=id;
+        a->val=val;
+        a->parent=NULL;
+        a->left=NULL;
+        a->right=NULL;
+
+        return a;
+    }
+
+
+//insertion part
+
+    void creating(int id,int val)
+    {
+
+        node* a= createnode(id,val);
+
+        if(root==NULL)
+        {
+            root=a;
+            return ;
+        }
+
+        queue<node*>q;
+
+        q.push(root);
+
+
+
+        while(!q.empty())
+        {
+            node* b=q.front();
+
+            q.pop();
+
+            if(b->left!=NULL)
+            {
+                q.push(b->left);
+            }
+            else
+            {
+                b->left=a;
+                a->parent=b;
+                return ;
+            }
+
+            if(b->right!=NULL)
+            {
+                q.push(b->right);
+            }
+            else
+            {
+
+                b->right=a;
+                a->parent=b;
+                return ;
+            }
+
+        }
+
+
+
+
+
+
+    }
+
+
+    //traversal part
+    
+    void BFS()
+    {
+        queue<node*>q;
+
+        q.push(root);
+
+        while(!q.empty())
+        {
+            int p=-1,r=-1,l=-1;
+
+            node* front_node=q.front();
+
+            q.pop();
+
+            if(front_node->left!=NULL)
+            {
+                l=front_node->left->id;
+
+                q.push(front_node->left);
+
+            }
+
+            if(front_node->right!=NULL)
+            {
+                r=front_node->right->id;
+
+                q.push(front_node->right);
+
+            }
+
+            if(front_node->parent!=NULL)
+            {
+                p=front_node->parent->id;
+
+            }
+
+
+            cout<<"node: "<<front_node->id<<" mother: "<<p<<" left: "<<l<<" right: "<<r<<endl;
+
+        }
+
+
+
+    }
+
+    void DFS(node* root)
+    {
+        if(root==NULL)
+        {
+            return ;
+        }
+        cout<<root->id<<" ";
+
+        DFS(root->left);
+        DFS(root->right);
+
+    }
+
+
+    void postorder(node* a)
+    {
+        if(a==NULL)
+        {
+            return;
+
+        }
+
+        postorder(a->left);
+        postorder(a->right);
+
+        cout<<a->id<<endl;
+    }
+
+    void inorder(node* a)
+    {
+        if(a==NULL)
+        {
+            return;
+
+        }
+
+        postorder(a->left);
+        cout<<a->id<<endl;
+        postorder(a->right);
+
+
+    }
+    
+    void  preorder(node* a)
+    {
+        if(a==NULL)
+        {
+            return ;
+        }
+        
+        cout<<a->id<<endl;
+        preorder(a->left);
+        preorder(a->right);
+        
+    }
+
+
+    //searching with the help of dfs
+
+    void search(node* a,int val)
+    {
+        if(a==NULL)
+        {
+            return ;
+        }
+        if(a->val==val)
+        {
+            cout<<a->id<<" ";
+        }
+        search(a->left,val);
+        search(a->right,val);
+    }
+
+
+
+
+
+
+};
+
+
+
+int main()
+{
+    bintree bb;
+
+    bb.creating(0,5);
+    bb.creating(1,10);
+    bb.creating(2,10);
+    bb.creating(3,9);
+    bb.creating(4,8);
+    bb.creating(5,5);
+    bb.creating(6,7);
+    bb.search(bb.root,5);
+
+
+
+    //bb.DFS(bb.root);
+
+    //bb.postorder(bb.root);
+    return 0;
+
+}
